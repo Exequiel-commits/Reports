@@ -5,64 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reports</title>
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background-color: #f5f5f5;
-        }
-
-        h1 {
-            margin-bottom: 20px;
-        }
-
-        .summary {
-            display: flex;
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-
-        .card {
-            background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-            width: 200px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-
-        .card h3 {
-            margin: 0 0 10px;
-        }
-
-        .card p {
-            font-size: 24px;
-            font-weight: bold;
-            margin: 0;
-        }
-
-        .report {
-            background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 15px;
-        }
-
-        th, td {
-            padding: 12px;
-            border-bottom: 1px solid #ddd;
-            text-align: left;
-        }
-
-        th {
-            background-color: #eee;
-        }
-    </style>
+    <link rel="stylesheet" href="reports.css">
 </head>
 
 <body>
@@ -92,6 +35,13 @@
 
         <h2>Transaction Summary</h2>
 
+        <div class="filter">
+            <label for="reportDate">Select Date:</label>
+            <input type="date" id="reportDate">
+            <button onclick="filterReport()">Filter</button>
+            <button onclick="showAll()">Show All</button>
+        </div>
+
         <table>
             <thead>
                 <tr>
@@ -109,80 +59,7 @@
 
     </div>
 
-    <script>
-
-    const transactions = [
-        {
-            id: "TRX-001",
-            date: "09/29/2026",
-            items: 3,
-            total: 850,
-            payment: "Cash"
-        },
-        {
-            id: "TRX-002",
-            date: "09/29/2026",
-            items: 2,
-            total: 1200,
-            payment: "GCash"
-        },
-        {
-            id: "TRX-003",
-            date: "09/30/2026",
-            items: 5,
-            total: 650,
-            payment: "Cash"
-        }
-    ];
-
-
-    let totalTransactions = transactions.length;
-
-
-    let totalSales = 0;
-
-    for (let i = 0; i < transactions.length; i++) {
-        totalSales += transactions[i].total;
-    }
-
-
-    let totalItems = 0;
-
-    for (let i = 0; i < transactions.length; i++) {
-        totalItems += transactions[i].items;
-    }
-
-
-    document.getElementById("totalTransactions").textContent = totalTransactions;
-
-    document.getElementById("totalSales").textContent =
-        "₱" + totalSales.toLocaleString("en-PH", {
-            minimumFractionDigits: 2
-        });
-
-    document.getElementById("totalItems").textContent = totalItems;
-
-
-    const reportTable = document.getElementById("reportTable");
-
-    for (let i = 0; i < transactions.length; i++) {
-
-        const row = document.createElement("tr");
-
-        row.innerHTML = `
-            <td>${transactions[i].id}</td>
-            <td>${transactions[i].date}</td>
-            <td>${transactions[i].items}</td>
-            <td>₱${transactions[i].total.toLocaleString("en-PH", {
-                minimumFractionDigits: 2
-            })}</td>
-            <td>${transactions[i].payment}</td>
-        `;
-
-        reportTable.appendChild(row);
-    }
-
-</script>
+    <script src="reports.js"></script>
 
 </body>
 </html>
